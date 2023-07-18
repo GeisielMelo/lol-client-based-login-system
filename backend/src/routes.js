@@ -8,6 +8,7 @@ const routes = new Router();
 
 routes.post("/users", UsersController.create);
 routes.post("/sessions", SessionsController.create);
+routes.get("/sessions/:email", SessionsController.show)
 
 
 // Every route after this middleware will need a token.

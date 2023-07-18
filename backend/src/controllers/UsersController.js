@@ -23,10 +23,11 @@ class UsersController {
   async create(req, res) {
     try {
       const { name, lastName, email, password } = req.body;
+      console.log(name, lastName, email, password)
       const user = await User.findOne({ email });
 
       if (user) {
-        return res.status(422).json({ error: `User ${email} already exists.` });
+        return res.status(409).json({ error: `User ${email} already exists.` });
       }
 
       // Encrypt password
