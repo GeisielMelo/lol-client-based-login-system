@@ -12,8 +12,8 @@ export const theme = {
       Lightest: "#ccd6f6",
     },
     White: {
-      default: "#e6f1ff",
-      Light: "",
+      default: "#fff",
+      Light: "e6f1ff",
       Lightest: "",
     },
     Green: {
@@ -24,8 +24,8 @@ export const theme = {
   },
   font: {
     family: {
-      one: "'Fira Code', monospace",
-      two: "'Inter var', sans-serif",
+      one: "'Mark-Pro', sans-serif",
+      two: "",
     },
     size: {
       bg: "32px",
