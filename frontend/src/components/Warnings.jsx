@@ -3,20 +3,20 @@ import styled from "styled-components";
 
 const Container = styled.div`
   position: absolute;
-  top: 50px;
+  bottom: 50px;
   border-radius: 8px;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 450px;
+  max-width: 350px;
   width: 100%;
   height: 45px;
   background-color: ${(props) => props.color};
 `;
 
 const Text = styled.p`
-  font-family: ${(props) => props.theme.font.family.description};
+  font-family: ${(props) => props.theme.font.family.one};
   font-size: ${(props) => props.theme.font.size.sm};
   font-style: normal;
   font-weight: 400;
