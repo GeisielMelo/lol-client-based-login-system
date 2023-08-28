@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-  width: ${(props) => props.maxWidth || "25px"};
-  height: ${(props) => props.maxHeight || "25px"};
+  width: ${(props) => props.maxWidth || "20px"};
+  height: ${(props) => props.maxHeight || "20px"};
   border-radius: 50%;
 `;
 
@@ -10,8 +10,8 @@ const Spinner = styled.div`
   border: 4px solid ${(props) => props.theme.color.Navy.Light};
   border-top: 4px solid ${(props) => props.theme.color.Green.default};
   border-radius: 50%;
-  max-width: ${(props) => props.maxWidth || "25px"};
-  max-height: ${(props) => props.maxHeight || "25px"};
+  max-width: ${(props) => props.maxWidth || "20px"};
+  max-height: ${(props) => props.maxHeight || "20px"};
   width: 100%;
   height: 100%;
   animation: spin 1s linear infinite;
