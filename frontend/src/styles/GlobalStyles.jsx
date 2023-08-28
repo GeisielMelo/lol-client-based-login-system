@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+import Font from "../fonts/Mark-Pro.ttf" 
 import { createGlobalStyle } from "styled-components";
 export const GlobalStyle = createGlobalStyle`
 
