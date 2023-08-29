@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useContext, useState } from "react";
 import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { isEmpty, isEmail } from "../utils/FieldsUtils";
+import { isEmail } from "../utils/FieldsUtils";
 import { Loading } from "../components/Loading";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import Warning from "../components/Warnings";
@@ -39,9 +39,18 @@ const Container = styled.div`
   }
 `;
 
+const Form = styled.form`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+`;
+
 const ElementDisabled = css`
   &:disabled {
-    background-color: ${(props) => props.theme.color.Slate.Lightest};
+    background: transparent;
+    color: rgb(173, 173, 173);
+    border: 2px solid rgba(173, 173, 173, 0.3);
     cursor: not-allowed;
   }
 `;
@@ -50,13 +59,6 @@ const Logo = styled.img`
   width: 110px;
   height: 30px;
   margin: 70px 0px;
-`;
-
-const ButtonsContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 10px 0px;
 `;
 
 const Title = styled.h1`
@@ -73,7 +75,7 @@ const Input = styled.input`
 
   padding: 10px;
   margin: 8px 0;
-  border: 1px solid ${(props) => props.theme.color.Slate.default};
+  border: none;
   border-radius: 4px;
 
   font-family: ${(props) => props.theme.font.family.one};
@@ -82,27 +84,35 @@ const Input = styled.input`
   font-weight: 400;
   line-height: 150%;
   color: #323238;
+  background: #ededed;
+  transition: all 0.1s ease-in-out;
+
+  &:focus {
+    border: 2px solid #323238;
+  }
 `;
 
-const Button = styled.button`
+const SubmitButton = styled.button`
   ${ElementDisabled}
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 
-  width: 65px;
-  height: 30px;
+  width: 72px;
+  height: 72px;
+  margin: 15px 0px;
+  border-radius: 27px;
   cursor: pointer;
 
-  background-color: ${(props) => props.theme.color.Navy.default};
-  border-radius: 4px;
-  color: ${(props) => props.theme.color.White.default};
-  border: none;
+  background: rgb(213, 50, 53);
+  color: rgb(252, 252, 252);
 `;
 
-const ChangePage = styled.p`
-  ${ElementDisabled}
+const ChangePage = styled.button`
+  position: fixed;
+  bottom: 40px;
+
   max-width: max-content;
   width: 100%;
   font-family: ${(props) => props.theme.font.family.one};
@@ -112,7 +122,15 @@ const ChangePage = styled.p`
   line-height: 150%;
   color: #323238;
   padding-left: 2px;
+  background: none;
   cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+  }
+  @media (max-width: 600px) {
+    position: static;
+    padding-top: 20px;
+  }
 `;
 
 const Sign = () => {
@@ -120,6 +138,7 @@ const Sign = () => {
   const { login, register, user } = useContext(AuthContext);
 
   const [loading, setLoading] = useState(false);
+  const [canSubmit, setCanSubmit] = useState(false);
   const [isRegisterMode, setIsRegisterMode] = useState(false);
 
   const [showWarning, setShowWarning] = useState(false);
@@ -156,6 +175,7 @@ const Sign = () => {
     }
 
     setIsRegisterMode(!isRegisterMode);
+    handleInputChange();
   };
 
   const handleSubmitLogin = async (e) => {
@@ -163,7 +183,7 @@ const Sign = () => {
     const email = loginForm.current.email.value;
     const password = loginForm.current.password.value;
 
-    if (isEmpty([email, password])) {
+    if (!email || !password) {
       return handleShowWarning("Invalid email or password", "error");
     }
 
@@ -194,7 +214,7 @@ const Sign = () => {
     const password = registerForm.current.password.value;
     const confirmPassword = registerForm.current.confirmPassword.value;
 
-    if (isEmpty([name, lastName, email, password, confirmPassword])) {
+    if (!name || !lastName || !email || !password || !confirmPassword) {
       return handleShowWarning("fill all fields", "warning");
     }
 
@@ -222,37 +242,47 @@ const Sign = () => {
     }
   };
 
+  const handleInputChange = () => {
+    const formFields = isRegisterMode ? registerForm.current : loginForm.current;
+
+    if (formFields) {
+      const inputFields = Array.from(formFields.querySelectorAll("input")).filter((input) => input.type !== "submit" && input.type !== "button" && input.type !== "hidden");
+
+      const areFieldsEmpty = inputFields.some((input) => !input.value);
+      setCanSubmit(!areFieldsEmpty);
+    }
+  };
+
   return (
     <Section>
       <Container>
         <Logo src={logoImage} alt="logo" width={200} height={200} />
         <Title>{isRegisterMode ? "Sign up" : "Sign in"}</Title>
 
-        <form onSubmit={isRegisterMode ? handleSubmitRegister : handleSubmitLogin} ref={isRegisterMode ? registerForm : loginForm}>
+        <Form onSubmit={isRegisterMode ? handleSubmitRegister : handleSubmitLogin} ref={isRegisterMode ? registerForm : loginForm}>
           {isRegisterMode ? (
             <>
-              <Input disabled={loading} type="text" name="name" placeholder="Name" autoComplete="off" />
-              <Input disabled={loading} type="text" name="lastName" placeholder="Last Name" autoComplete="off" />
-              <Input disabled={loading} type="email" name="email" placeholder="E-mail" autoComplete="email" />
-              <Input disabled={loading} type="password" name="password" placeholder="Password" autoComplete="new-password" />
-              <Input disabled={loading} type="password" name="confirmPassword" placeholder="Confirm Password" autoComplete="new-password" />
+              <Input disabled={loading} type="text" name="name" placeholder="Name" autoComplete="off" onChange={handleInputChange} />
+              <Input disabled={loading} type="text" name="lastName" placeholder="Last Name" autoComplete="off" onChange={handleInputChange} />
+              <Input disabled={loading} type="email" name="email" placeholder="E-mail" autoComplete="email" onChange={handleInputChange} />
+              <Input disabled={loading} type="password" name="password" placeholder="Password" autoComplete="new-password" onChange={handleInputChange} />
+              <Input disabled={loading} type="password" name="confirmPassword" placeholder="Confirm Password" autoComplete="new-password" onChange={handleInputChange} />
             </>
           ) : (
             <>
-              <Input disabled={loading} type="email" name="email" placeholder="E-mail" autoComplete="email" />
-              <Input disabled={loading} type="password" name="password" placeholder="Password" autoComplete="current-password" />
+              <Input disabled={loading} type="email" name="email" placeholder="E-mail" autoComplete="email" onChange={handleInputChange} />
+              <Input disabled={loading} type="password" name="password" placeholder="Password" autoComplete="current-password" onChange={handleInputChange} />
             </>
           )}
 
-          <ButtonsContainer>
-            <ChangePage style={{ cursor: !loading ? "pointer" : "not-allowed" }} onClick={!loading ? handleResetFields : null}>
-              {isRegisterMode ? "Already registered?" : "Not registered yet?"}
-            </ChangePage>
-            <Button disabled={loading} type="submit">
-              {loading ? <Loading /> : <ArrowRightAltIcon />}
-            </Button>
-          </ButtonsContainer>
-        </form>
+          <SubmitButton disabled={loading || !canSubmit} type="submit">
+            {loading ? <Loading /> : <ArrowRightAltIcon />}
+          </SubmitButton>
+        </Form>
+
+        <ChangePage disabled={loading} onClick={handleResetFields}>
+          {isRegisterMode ? "SIGN IN" : "CREATE ACCOUNT"}
+        </ChangePage>
 
         {showWarning && warningMessage && warningType && <Warning message={warningMessage} type={warningType} />}
       </Container>
