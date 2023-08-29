@@ -14,7 +14,6 @@ class UsersController {
         return res.json(user);
       }
     } catch (error) {
-      console.log(error);
       return res.status(500).json({ error: "Internal server error" });
     }
   }
@@ -23,7 +22,6 @@ class UsersController {
   async create(req, res) {
     try {
       const { name, lastName, email, password } = req.body;
-      console.log(name, lastName, email, password)
       const user = await User.findOne({ email });
 
       if (user) {
@@ -43,7 +41,6 @@ class UsersController {
 
       return res.status(201).json({ success: `User ${email} registered.` });
     } catch (error) {
-      console.log(error);
       return res.status(500).json({ error: "Fail to create a new user." });
     }
   }
@@ -72,7 +69,6 @@ class UsersController {
 
       return res.status(200).json(user);
     } catch (error) {
-      console.log(error);
       return res.status(500).json({ error: "Internal server error" });
     }
   }
@@ -90,7 +86,6 @@ class UsersController {
       await user.deleteOne();
       return res.status(200).json();
     } catch (error) {
-      console.log(error);
       return res.status(500).json({ error: "Internal server error" });
     }
   }
