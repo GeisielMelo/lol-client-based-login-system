@@ -6,7 +6,8 @@ import { Loading } from "../components/Loading";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import Warning from "../components/Warnings";
 import logoImage from "../images/logo.png";
-import { Section, Container, Form, Logo, Title, SubmitButton, ChangePage } from "../components/StyledSign/Styles";
+import { Section, Container, Form, Logo, Title } from "../components/StyledSign/Styles";
+import { SubmitButton, ChangePage } from "../components/StyledSign/Buttons";
 import Input from "../components/StyledSign/Input";
 
 const Sign = () => {
