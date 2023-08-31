@@ -1,6 +1,14 @@
 import styled, { css } from "styled-components";
 import backgroundImage from "../../images/bg.jpg";
 
+export const ElementDisabled = css`
+  &:disabled {
+    background: transparent;
+    color: rgb(173, 173, 173);
+    cursor: not-allowed;
+  }
+`;
+
 export const Section = styled.section`
   display: flex;
   flex-direction: column;
@@ -38,13 +46,7 @@ export const Form = styled.form`
   width: 100%;
 `;
 
-export const ElementDisabled = css`
-  &:disabled {
-    background: transparent;
-    color: rgb(173, 173, 173);
-    cursor: not-allowed;
-  }
-`;
+
 
 export const Logo = styled.img`
   width: 110px;
@@ -83,46 +85,3 @@ export const Input = styled.input`
   }
 `;
 
-export const SubmitButton = styled.button`
-  ${ElementDisabled}
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-
-  width: 72px;
-  height: 72px;
-  margin: 15px 0px;
-  border-radius: 27px;
-  cursor: pointer;
-
-  background: rgb(213, 50, 53);
-  color: rgb(252, 252, 252);
-  &:disabled {
-    border: 2px solid rgba(173, 173, 173, 0.3);
-  }
-`;
-
-export const ChangePage = styled.button`
-  position: fixed;
-  bottom: 40px;
-
-  max-width: max-content;
-  width: 100%;
-  font-family: ${(props) => props.theme.font.family.one};
-  font-size: ${(props) => props.theme.font.size.sm};
-  font-style: normal;
-  font-weight: 400;
-  line-height: 150%;
-  color: #323238;
-  padding-left: 2px;
-  background: none;
-  cursor: pointer;
-  &:disabled {
-    cursor: not-allowed;
-  }
-  @media (max-width: 600px) {
-    position: static;
-    padding-top: 20px;
-  }
-`;
