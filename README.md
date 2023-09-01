@@ -2,9 +2,15 @@
 
 Building login systems is a routine task in my daily work, and I often find myself recreating the same functionality repeatedly. Realizing that this can be a time-consuming process, I decided to create a clean and reusable login system that can easily be integrated into my future applications. This system streamlines the login process, saving valuable development time and ensuring consistent functionality across my projects.
 
+> [!NOTE]  
+> This League of Legends client-based login system serves as a prime illustration of our capabilities.
+
 ## Preview
 
 ![App Screenshot](https://github.com/GeisielMelo/lol-client-based-login-system/blob/main/frontend/src/images/preview.png?raw=true)
+
+> [!WARNING]  
+> Please note that this system is not affiliated with Riot Games and is intended for illustrative purposes only. Your Riot Games login credentials will not function with this system.
 
 ## Features
 
