@@ -46,8 +46,6 @@ export const Form = styled.form`
   width: 100%;
 `;
 
-
-
 export const Logo = styled.img`
   width: 110px;
   height: 30px;
@@ -84,4 +82,3 @@ export const Input = styled.input`
     border: 2px solid #323238;
   }
 `;
-
