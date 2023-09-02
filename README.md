@@ -7,7 +7,7 @@ Building login systems is a routine task in my daily work, and I often find myse
 
 ## Preview
 
-![App Screenshot](https://github.com/GeisielMelo/lol-client-based-login-system/blob/main/frontend/src/images/preview.png?raw=true)
+![App Screenshot](https://github.com/GeisielMelo/lol-client-based-login-system/blob/master/frontend/src/images/preview.png?raw=true)
 
 > [!WARNING]  
 > Please note that this system is not affiliated with Riot Games and is intended for illustrative purposes only. Your Riot Games login credentials will not function with this system.
