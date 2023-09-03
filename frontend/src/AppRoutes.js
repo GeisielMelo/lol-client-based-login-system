@@ -4,7 +4,8 @@ import { AuthProvider, AuthContext } from "./context/AuthContext";
 import { Loading } from "./components/Loading";
 
 import Index from "./pages/Index";
-import Sign from "./pages/Sign";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const AppRoutes = () => {
   const Private = ({ children }) => {
@@ -15,7 +16,7 @@ const AppRoutes = () => {
     }
 
     if (!authenticated) {
-      return <Navigate to="/sign" />;
+      return <Navigate to="/sign-in" />;
     }
 
     return children;
@@ -43,18 +44,29 @@ const AppRoutes = () => {
             path="*"
             element={
               <Public>
-                <Sign />
+                <Login />
               </Public>
             }
           />
+
           <Route
-            path="/sign"
+            path="/sign-in"
             element={
               <Public>
-                <Sign />
+                <Login />
               </Public>
             }
           />
+
+          <Route
+            path="/sign-up"
+            element={
+              <Public>
+                <Register />
+              </Public>
+            }
+          />
+
           <Route
             path="/"
             element={
