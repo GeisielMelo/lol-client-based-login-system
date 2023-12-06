@@ -1,6 +1,6 @@
 # Medium-Level Login System 
 
-Building login systems is a routine task in my daily work, and I often find myself recreating the same functionality repeatedly. Realizing that this can be a time-consuming process, I decided to create a clean and reusable login system that can easily be integrated into my future applications. This system streamlines the login process, saving valuable development time and ensuring consistent functionality across my projects.
+Medium-level login system inspired by the old League of Legends login screen. Developed in my free time using the MERN tech stack, the goal is to provide a clean and aesthetically pleasing user experience.
 
 > [!NOTE]  
 > This League of Legends client-based login system serves as a prime illustration of our capabilities.
